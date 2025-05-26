@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demographics</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>Demographics</h1>
+    <form method="post" action="/demographics">
+        <!-- Age Dropdown -->
+        <label for="age">Age:</label>
+        <select id="age" name="age" required>
+            <option value="" disabled selected>Select your age</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+            <option value="26">26</option>
+            <option value="27">27</option>
+            <option value="28">28</option>
+            <option value="29">29</option>
+            <option value="30">30</option>
+
+        </select>
+
+        <!-- Education Dropdown -->
+        <label for="education">Education:</label>
+        <select id="education" name="education" required>
+            <option value="" disabled selected>Select your education level</option>
+            <option value="high_school">High School</option>
+            <option value="bachelors">Bachelor's Degree</option>
+            <option value="masters">Master's Degree</option>
+            <option value="phd">PhD</option>
+            <option value="other">Other</option>
+        </select>
+
+        <!-- Familiarity with Cognitive Science (Radio Buttons) -->
+        <label>Familiarity with Cognitive Science:</label>
+        <div>
+            <label>
+                <input type="radio" name="familiarity" value="none" required>
+                None
+            </label>
+            <label>
+                <input type="radio" name="familiarity" value="basic">
+                Basic
+            </label>
+            <label>
+                <input type="radio" name="familiarity" value="intermediate">
+                Intermediate
+            </label>
+            <label>
+                <input type="radio" name="familiarity" value="advanced">
+                Advanced
+            </label>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

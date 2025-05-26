@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cognitive Reflection Test</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script>
+        let startTime;
+        window.onload = () => {
+            startTime = Date.now();
+        };
+
+        function setResponseTime() {
+            const endTime = Date.now();
+            const responseTime = (endTime - startTime) / 1000; // Convert to seconds
+            document.getElementById("response_time").value = responseTime;
+        }
+    </script>
+</head>
+<body>
+    <h1>Cognitive Reflection Test</h1>
+    <form method="post" action="/crt" onsubmit="setResponseTime()">
+        <p>{{ question["question"] }}</p>
+        <input type="hidden" name="index" value="{{ index }}">
+        <label for="answer">Your Answer:</label>
+        <input type="number" id="answer" name="answer" step="any" required>
+        <input type="hidden" id="response_time" name="response_time">
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

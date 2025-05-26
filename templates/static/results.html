@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>Analysis Results</h1>
+
+    <h2>Demographics</h2>
+    <p>Average Age: {{ results.demographics.average_age }}</p>
+    <h3>Age Distribution</h3>
+    <img src="/static/plots/age_distribution.png" alt="Age Distribution">
+    <h3>Education Distribution</h3>
+    <img src="/static/plots/education_distribution.png" alt="Education Distribution">
+    <h3>Familiarity Distribution</h3>
+    <img src="/static/plots/familiarity_distribution.png" alt="Familiarity Distribution">
+
+    <h2>CRT</h2>
+    <p>Average Response Time: {{ results.crt.average_response_time }}</p>
+    <h3>CRT Response Times</h3>
+    <img src="/static/plots/crt_response_times.png" alt="CRT Response Times">
+
+    <h2>Delay Discounting</h2>
+    <p>Average Response Time: {{ results.delay_discounting.average_response_time }}</p>
+    <h3>Delay Discounting Response Times</h3>
+    <img src="/static/plots/delay_response_times.png" alt="Delay Discounting Response Times">
+    <h3>Delay Discounting Choices</h3>
+    <img src="/static/plots/delay_choices.png" alt="Delay Discounting Choices">
+</body>
+</html>

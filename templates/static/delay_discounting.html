@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delay Discounting</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script>
+        let startTime;
+        window.onload = () => {
+            startTime = Date.now();
+        };
+
+        function setResponseTime() {
+            const endTime = Date.now();
+            const responseTime = (endTime - startTime) / 1000; // Convert to seconds
+            document.getElementById("response_time").value = responseTime;
+        }
+    </script>
+</head>
+<body>
+    <h1>Delay Discounting Task</h1>
+    <p>Choose between the following options:</p>
+    <form method="post" action="/delay_discounting" onsubmit="setResponseTime()">
+        <label>
+            <input type="radio" name="choice" value="smaller" required>
+            $10 now
+        </label>
+        <label>
+            <input type="radio" name="choice" value="larger" required>
+            $20 in 30 days
+        </label>
+        <input type="hidden" id="response_time" name="response_time">
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

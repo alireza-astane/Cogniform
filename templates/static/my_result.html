@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Results</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>My Results</h1>
+    {% for task_name, responses in results.items() %}
+        <h2>{{ task_name | capitalize }}</h2>
+        {% if task_name == "demographics" %}
+            <ul>
+                <li><strong>Age:</strong> {{ responses.age }}</li>
+                <li><strong>Education:</strong> {{ responses.education }}</li>
+                <li><strong>Familiarity:</strong> {{ responses.familiarity }}</li>
+            </ul>
+        {% else %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Question</th>
+                        <th>Your Answer</th>
+                        <th>Response Time (s)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for response in responses %}
+                        <tr>
+                            <td>{{ response.question }}</td>
+                            <td>{{ response.user_answer }}</td>
+                            <td>{{ response.response_time }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    {% endfor %}
+    <a href="/">Back to Home</a>
+</body>
+</html>

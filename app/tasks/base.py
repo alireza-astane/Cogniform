@@ -12,7 +12,3 @@ class CognitiveTask:
 
     def get_results(self):
         return self.responses
-
-    def validate_response(self, response):
-        # Placeholder for response validation logic
-        return True

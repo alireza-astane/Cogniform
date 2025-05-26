@@ -71,6 +71,7 @@ async def home(request: Request):
         active_sessions[session_id] = User(session_id)
         response = templates.TemplateResponse("static/home.html", {"request": request})
         response.set_cookie(key="session_id", value=session_id)
+        print(f"Set-Cookie: session_id={session_id}")  # Debug
         return response
     return templates.TemplateResponse("static/home.html", {"request": request})
 
@@ -103,7 +104,11 @@ async def my_result(request: Request, session_id: str = Depends(get_session)):
     print(results)
 
     # Save all responses in the database
-    save_user_responses(session_id=session_id, responses=results)
+    db = next(get_db())
+    try:
+        save_user_responses(db, session_id, results)
+    finally:
+        db.close()
 
     return templates.TemplateResponse(
         "static/my_result.html", {"request": request, "results": results}
@@ -122,6 +127,23 @@ async def my_result(request: Request, session_id: str = Depends(get_session)):
 
 @app.get("/results")
 async def results(request: Request):
+    global analysis_results
+    if "demographics" not in analysis_results:
+        analysis_results["demographics"] = {
+            "average_age": None,
+            "education_distribution": {},
+            "familiarity_distribution": {},
+        }
+    if "crt" not in analysis_results:
+        analysis_results["crt"] = {
+            "average_response_time": None,
+            "accuracy": None,
+        }
+    if "delay_discounting" not in analysis_results:
+        analysis_results["delay_discounting"] = {
+            "average_response_time": None,
+            "choice_distribution": {},
+        }
     return templates.TemplateResponse(
         "static/results.html", {"request": request, "results": analysis_results}
     )
@@ -211,8 +233,8 @@ async def submit_crt(request: Request, session_id: str = Depends(get_session)):
         return RedirectResponse("/crt", status_code=303)
     return RedirectResponse("/delay_discounting", status_code=303)
 
-    # Redirect to the next question or results
-    next_question = crt_task.get_question(question_index + 1)
-    if next_question:
-        return RedirectResponse("/crt", status_code=303)
-    return RedirectResponse("/delay_discounting", status_code=303)
+    # # Redirect to the next question or results
+    # next_question = crt_task.get_question(question_index + 1)
+    # if next_question:
+    #     return RedirectResponse("/crt", status_code=303)
+    # return RedirectResponse("/delay_discounting", status_code=303)

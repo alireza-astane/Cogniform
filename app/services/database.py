@@ -2,6 +2,7 @@ from sqlalchemy import create_engine, Column, Integer, String, Float, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import os
+from sqlalchemy.orm import Session
 
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./responses.db")
 
@@ -45,22 +46,21 @@ def get_db():
         db.close()
 
 
-def save_user_responses(session_id, responses):
-    db = next(get_db())
+def save_user_responses(db: Session, session_id: str, responses: dict):
     user_responses = UserResponses(
         session_id=session_id,
         age=responses.get("demographics", {}).get("age"),
         education=responses.get("demographics", {}).get("education"),
         familiarity=responses.get("demographics", {}).get("familiarity"),
-        crt_q1_answer=responses.get("crt", [{}])[0].get("user_answer"),
-        crt_q1_correct=responses.get("crt", [{}])[0].get("is_correct"),
-        crt_q1_response_time=responses.get("crt", [{}])[0].get("response_time"),
-        crt_q2_answer=responses.get("crt", [{}])[1].get("user_answer"),
-        crt_q2_correct=responses.get("crt", [{}])[1].get("is_correct"),
-        crt_q2_response_time=responses.get("crt", [{}])[1].get("response_time"),
-        crt_q3_answer=responses.get("crt", [{}])[2].get("user_answer"),
-        crt_q3_correct=responses.get("crt", [{}])[2].get("is_correct"),
-        crt_q3_response_time=responses.get("crt", [{}])[2].get("response_time"),
+        crt_q1_answer=responses.get("crt", [{}])[0].get("user_answer", None),
+        crt_q1_correct=responses.get("crt", [{}])[0].get("is_correct", None),
+        crt_q1_response_time=responses.get("crt", [{}])[0].get("response_time", None),
+        crt_q2_answer=responses.get("crt", [{}])[1].get("user_answer", None),
+        crt_q2_correct=responses.get("crt", [{}])[1].get("is_correct", None),
+        crt_q2_response_time=responses.get("crt", [{}])[1].get("response_time", None),
+        crt_q3_answer=responses.get("crt", [{}])[2].get("user_answer", None),
+        crt_q3_correct=responses.get("crt", [{}])[2].get("is_correct", None),
+        crt_q3_response_time=responses.get("crt", [{}])[2].get("response_time", None),
         delay_choice=responses.get("delay_discounting", [{}])[0].get("user_answer"),
         delay_response_time=responses.get("delay_discounting", [{}])[0].get(
             "response_time"
@@ -70,9 +70,6 @@ def save_user_responses(session_id, responses):
     db.commit()
     db.refresh(user_responses)
     return user_responses
-
-
-from sqlalchemy.orm import Session
 
 
 def fetch_all_responses(db: Session):

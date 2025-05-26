@@ -3,7 +3,6 @@ from app.models.demographics import Demographics
 from app.models.tasks import CRTTask, StroopTask, DelayDiscountingTask
 from app.services.database import save_response, get_responses
 from app.tasks.crt import CognitiveReflectionTest as CRT
-from app.tasks.stroop import StroopTask as Stroop
 from app.tasks.delay_discounting import DelayDiscountingTask as DelayDiscounting
 
 router = APIRouter()

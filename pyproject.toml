@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "cogniform"
-version = "0.1.0"
+name = "cogniform"  # The name of your package
+version = "0.1.0"  # The version of your package
 description = "An interactive cognitive science survey platform."
-authors = ["Your Name <your.email@example.com>"]
+authors = ["Astane"]
 license = "MIT"
 
 [tool.poetry.dependencies]
@@ -12,9 +12,11 @@ uvicorn = "^0.17.0"
 pydantic = "^1.9.0"
 matplotlib = "^3.5.0"
 seaborn = "^0.11.2"
-sqlite = "^3.36.0"  # or any other database library you choose
+sqlalchemy = "^1.4.0"
+jinja2 = "^3.1.0"
+python-multipart 
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 pytest = "^7.0.0"
 flake8 = "^4.0.0"
 black = "^22.0.0"

@@ -28,21 +28,25 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install poetry
-          poetry install --with dev
-          pip install pytest  # Explicitly ensure pytest installation
+          poetry install
+          pip install pytest
 
+      # Step 4: Verify installed dependencies
+      - name: List installed packages
+        run: |
+          poetry show
 
-      # Step 4: Run tests
+      # Step 5: Run tests
       - name: Run tests
         run: |
           pytest tests/
 
-      # Step 5: Lint the code
+      # Step 6: Lint the code
       - name: Lint code
         run: |
           flake8 app tests
 
-      # Step 6: Check code formatting
+      # Step 7: Check code formatting
       - name: Check code formatting
         run: |
           black --check .

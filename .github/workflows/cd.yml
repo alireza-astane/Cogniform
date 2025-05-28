@@ -14,25 +14,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Step 2: Set up Python
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.9'
-
-      # Step 3: Install dependencies
-      - name: Install dependencies
+      # Step 2: Install Docker
+      - name: Install Docker
         run: |
-          python -m pip install --upgrade pip
-          pip install poetry
-          poetry install
+          sudo apt-get update
+          sudo apt-get install -y docker.io
 
-      # Step 4: Build Docker image
+      # Step 3: Build Docker image
       - name: Build Docker image
         run: |
           docker build -t cogniform .
 
-      # Step 5: Run Docker container locally
+      # Step 4: Run Docker container locally
       - name: Run Docker container
         run: |
           docker stop cogniform || true

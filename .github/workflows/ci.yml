@@ -23,12 +23,12 @@ jobs:
         with:
           python-version: '3.9'
 
-      # Step 3: Install dependencies
+      # Step 3: Install dependencies (including dev dependencies)
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install poetry
-          poetry install
+          poetry install --with dev
 
       # Step 4: Run tests
       - name: Run tests
@@ -38,5 +38,9 @@ jobs:
       # Step 5: Lint the code
       - name: Lint code
         run: |
-          pip install flake8
           flake8 app tests
+
+      # Step 6: Check code formatting
+      - name: Check code formatting
+        run: |
+          black --check .

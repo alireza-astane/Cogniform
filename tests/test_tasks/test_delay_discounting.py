@@ -1,6 +1,6 @@
 import pytest
 from datetime import datetime
-from app.tasks.delay_discounting import DelayDiscountingTask
+from cogniform.tasks.delay_discounting import DelayDiscountingTask
 
 
 @pytest.fixture

@@ -1,7 +1,7 @@
 import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from app.services.database import (
+from cogniform.services.database import (
     Base,
     UserResponses,
     init_db,

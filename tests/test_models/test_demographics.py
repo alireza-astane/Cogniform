@@ -1,6 +1,6 @@
 import pytest
 from pydantic import ValidationError
-from app.models.demographics import Demographics
+from cogniform.models.demographics import Demographics
 
 
 def test_valid_demographics():
@@ -19,7 +19,7 @@ def test_missing_age():
         Demographics(
             education="Master's Degree", familiarity_with_cognitive_science="Advanced"
         )
-    assert "field required" in str(exc_info.value)
+    assert "Field required" in str(exc_info.value)
 
 
 def test_invalid_age_type():
@@ -29,16 +29,16 @@ def test_invalid_age_type():
             education="High School",
             familiarity_with_cognitive_science="Basic",
         )
-    assert "value is not a valid integer" in str(exc_info.value)
+    assert "Input should be a valid integer" in str(exc_info.value)
 
 
 def test_missing_education():
     with pytest.raises(ValidationError) as exc_info:
         Demographics(age=30, familiarity_with_cognitive_science="None")
-    assert "field required" in str(exc_info.value)
+    assert "Field required" in str(exc_info.value)
 
 
 def test_missing_familiarity():
     with pytest.raises(ValidationError) as exc_info:
         Demographics(age=28, education="PhD")
-    assert "field required" in str(exc_info.value)
+    assert "Field required" in str(exc_info.value)

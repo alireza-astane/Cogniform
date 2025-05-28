@@ -5,12 +5,12 @@ from fastapi.staticfiles import StaticFiles
 from uuid import uuid4
 
 
-from app.services.database import init_db
+from cogniform.services.database import init_db
 
 
 import asyncio
-from app.services.database import get_db
-from app.services.analysis import analyze_data
+from cogniform.services.database import get_db
+from cogniform.services.analysis import analyze_data
 
 analysis_results = {}  # Store the latest analysis results in memory
 
@@ -54,7 +54,7 @@ def get_session(request: Request):
     return session_id
 
 
-from app.models.user import User
+from cogniform.models.user import User
 
 
 @app.on_event("startup")
@@ -92,7 +92,7 @@ async def submit_delay_discounting(
     return RedirectResponse("/my_result", status_code=303)
 
 
-from app.services.database import save_user_responses
+from cogniform.services.database import save_user_responses
 
 
 @app.get("/my_result")
@@ -190,7 +190,7 @@ async def submit_demographics(request: Request, session_id: str = Depends(get_se
     return RedirectResponse("/crt", status_code=303)
 
 
-from app.tasks.crt import CognitiveReflectionTest
+from cogniform.tasks.crt import CognitiveReflectionTest
 
 crt_task = CognitiveReflectionTest()
 

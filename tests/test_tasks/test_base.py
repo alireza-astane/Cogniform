@@ -1,5 +1,5 @@
 import pytest
-from app.tasks.base import CognitiveTask
+from cogniform.tasks.base import CognitiveTask
 
 
 class TestCognitiveTask:

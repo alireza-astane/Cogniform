@@ -1,5 +1,5 @@
 import pytest
-from app.models.user import User
+from cogniform.models.user import User
 
 
 @pytest.fixture

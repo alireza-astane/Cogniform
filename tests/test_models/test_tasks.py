@@ -1,5 +1,10 @@
 import pytest
-from app.models.tasks import CRTTask, StroopTask, DelayDiscountingTask, ConsistencyCheck
+from cogniform.models.tasks import (
+    CRTTask,
+    StroopTask,
+    DelayDiscountingTask,
+    ConsistencyCheck,
+)
 
 
 def test_crt_task_initialization():

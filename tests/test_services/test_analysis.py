@@ -1,14 +1,14 @@
 import pytest
 import pandas as pd
 from unittest.mock import MagicMock
-from app.services.analysis import (
+from cogniform.services.analysis import (
     analyze_responses,
     visualize_results,
     plot_accuracy,
     analyze_data,
 )
 from sqlalchemy.orm import Session
-from app.services.database import UserResponses
+from cogniform.services.database import UserResponses
 
 
 @pytest.fixture

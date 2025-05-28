@@ -56,7 +56,7 @@ def plot_accuracy(data: pd.DataFrame, task_name: str) -> None:
 
 from typing import Dict, List
 from sqlalchemy.orm import Session
-from app.services.database import fetch_all_responses
+from cogniform.services.database import fetch_all_responses
 import statistics
 
 

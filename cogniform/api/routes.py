@@ -1,9 +1,9 @@
 from fastapi import APIRouter, HTTPException
-from app.models.demographics import Demographics
-from app.models.tasks import CRTTask, StroopTask, DelayDiscountingTask
-from app.services.database import save_response, get_responses
-from app.tasks.crt import CognitiveReflectionTest as CRT
-from app.tasks.delay_discounting import DelayDiscountingTask as DelayDiscounting
+from cogniform.models.demographics import Demographics
+from cogniform.models.tasks import CRTTask, StroopTask, DelayDiscountingTask
+from cogniform.services.database import save_response, get_responses
+from cogniform.tasks.crt import CognitiveReflectionTest as CRT
+from cogniform.tasks.delay_discounting import DelayDiscountingTask as DelayDiscounting
 
 router = APIRouter()
 
@@ -25,18 +25,6 @@ async def get_crt_task():
 async def submit_crt_response(response: CRTTask):
     save_response("crt", response.dict())
     return {"message": "CRT response submitted successfully."}
-
-
-@router.get("/task/stroop")
-async def get_stroop_task():
-    stroop_task = Stroop()
-    return stroop_task.get_task()
-
-
-@router.post("/task/stroop/response")
-async def submit_stroop_response(response: StroopTask):
-    save_response("stroop", response.dict())
-    return {"message": "Stroop response submitted successfully."}
 
 
 @router.get("/task/delay_discounting")

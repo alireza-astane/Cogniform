@@ -1,5 +1,5 @@
 import pytest
-from app.tasks.crt import CognitiveReflectionTest
+from cogniform.tasks.crt import CognitiveReflectionTest
 
 
 @pytest.fixture

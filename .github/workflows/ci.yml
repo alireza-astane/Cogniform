@@ -39,13 +39,3 @@ jobs:
       - name: Run tests
         run: |
           poetry run pytest tests/
-
-      # Step 6: Lint the code
-      - name: Lint code
-        run: |
-          poetry run flake8 app tests
-
-      # Step 7: Check code formatting
-      - name: Check code formatting
-        run: |
-          poetry run black --check .

@@ -1,66 +1,191 @@
 # CogniForm
 
-CogniForm is an interactive cognitive science survey platform designed to deliver and collect cognitive task surveys via a web browser. This project emphasizes clean code, modularity, object-oriented design, and collaboration through Git, along with packaging and Dockerization.
+CogniForm is an interactive cognitive science survey platform designed to assess various cognitive traits through tasks such as the Cognitive Reflection Test (CRT) and Delay Discounting Task. The platform provides a user-friendly interface for participants to complete surveys and view their results, while also offering tools for researchers to analyze and visualize collected data.
 
-## Project Overview
-
-CogniForm serves various cognitive tasks, including:
-
-1. **Cognitive Reflection Test (CRT)**: A test designed to measure cognitive reflection through open-ended questions.
-2. **Stroop-like Task**: A task that assesses cognitive control by requiring users to identify the color of words that may conflict with their meaning.
-3. **Delay Discounting Task**: A task that evaluates decision-making by offering choices between smaller-sooner and larger-later rewards.
-
-The application is built using FastAPI, allowing for a RESTful API that serves randomized tasks, collects user responses, and provides feedback or visualizations as needed.
+---
 
 ## Features
 
-- Modular and object-oriented design for cognitive tasks.
-- FastAPI server for handling requests and responses.
-- Data validation and analysis using Pydantic and Python libraries.
-- Visualization of results using Matplotlib or Seaborn.
-- Containerization with Docker for easy deployment.
-- Continuous Integration/Continuous Deployment (CI/CD) setup for testing and linting.
-- Comprehensive documentation and contribution guidelines.
+- **Interactive Cognitive Tasks**: Includes tasks like CRT and Delay Discounting to assess cognitive traits.
+- **Demographics Collection**: Collects participant demographics such as age, education, and familiarity with cognitive science.
+- **Real-Time Results**: Displays individual results immediately after task completion.
+- **Data Analysis and Visualization**: Provides aggregated analysis and visualizations of participant data.
+- **Database Integration**: Stores participant responses in a database for further analysis.
+- **Dockerized Deployment**: Easily deployable using Docker and Docker Compose.
+- **Continuous Integration/Deployment**: Automated CI/CD pipelines using GitHub Actions.
 
-## Getting Started
+---
+
+## Table of Contents
+
+1. [Installation](#installation)
+2. [Usage](#usage)
+3. [Project Structure](#project-structure)
+4. [Development](#development)
+5. [Testing](#testing)
+6. [API Endpoints](#api-endpoints)
+7. [Contributing](#contributing)
+8. [License](#license)
+
+---
+
+## Installation
 
 ### Prerequisites
 
-- Python 3.8 or higher
-- Docker and Docker Compose
-- Git
+- Python 3.12 or higher
+- Docker and Docker Compose (optional for containerized deployment)
 
-### Installation
+### Steps
 
 1. Clone the repository:
-   ```
-   git clone https://github.com/yourusername/CogniForm.git
+   ```bash
+   git clone https://github.com/your-username/CogniForm.git
    cd CogniForm
    ```
 
-2. Install dependencies:
-   ```
-   pip install -r requirements.txt
+2. Install dependencies using Poetry:
+   ```bash
+   pip install poetry
+   poetry install
    ```
 
-3. Run the application using Docker:
+3. Set up the database:
+   ```bash
+   python -m cogniform.services.database
    ```
+
+4. Run the application:
+   ```bash
+   poetry run uvicorn cogniform.main:app --reload
+   ```
+
+5. Access the application at `http://127.0.0.1:8000`.
+
+---
+
+## Usage
+
+### Running with Docker
+
+1. Build and run the Docker container:
+   ```bash
    docker-compose up --build
    ```
 
-### Usage
+2. Access the application at `http://127.0.0.1:8000`.
 
-- Access the API at `http://localhost:8000`.
-- Use the endpoints to retrieve tasks, submit responses, and view results.
+---
+
+## Project Structure
+
+```
+CogniForm/
+├── cogniform/                # Core application code
+│   ├── api/                  # API routes
+│   ├── core/                 # Configuration and initialization
+│   ├── models/               # Data models
+│   ├── services/             # Database and analysis services
+│   ├── tasks/                # Cognitive tasks logic
+│   └── main.py               # FastAPI application entry point
+├── templates/                # HTML templates and static files
+├── tests/                    # Unit and integration tests
+├── .github/workflows/        # CI/CD workflows
+├── Dockerfile                # Docker configuration
+├── docker-compose.yml        # Docker Compose configuration
+├── pyproject.toml            # Poetry configuration
+└── README.md                 # Project documentation
+```
+
+---
+
+## Development
+
+### Setting Up the Development Environment
+
+1. Install development dependencies:
+   ```bash
+   poetry install --with dev
+   ```
+
+2. Run the application in development mode:
+   ```bash
+   poetry run uvicorn cogniform.main:app --reload
+   ```
+
+3. Access the application at `http://127.0.0.1:8000`.
+
+---
+
+## Testing
+
+### Running Tests
+
+1. Run all tests:
+   ```bash
+   poetry run pytest
+   ```
+
+2. Run specific tests:
+   ```bash
+   poetry run pytest tests/test_services/test_database.py
+   ```
+
+3. View test coverage:
+   ```bash
+   poetry run pytest --cov=cogniform
+   ```
+
+---
+
+## API Endpoints
+
+### Public Endpoints
+
+- `GET /`: Home page.
+- `GET /demographics`: Demographics form.
+- `POST /demographics`: Submit demographics data.
+- `GET /crt`: Cognitive Reflection Test.
+- `POST /crt`: Submit CRT response.
+- `GET /delay_discounting`: Delay Discounting Task.
+- `POST /delay_discounting`: Submit Delay Discounting response.
+- `GET /results`: View aggregated analysis results.
+
+### Admin Endpoints
+
+- `GET /responses`: Fetch all user responses (requires database access).
+
+---
 
 ## Contributing
 
-Contributions are welcome! Please see the [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines on how to contribute to this project.
+We welcome contributions from the community! Please follow the [contribution guidelines](CONTRIBUTING.md) to get started.
+
+### Steps to Contribute
+
+1. Fork the repository.
+2. Create a new branch:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+3. Make your changes and commit them:
+   ```bash
+   git commit -m "Add feature: your feature description"
+   ```
+4. Push your branch:
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+5. Create a pull request.
+
+---
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for more details.
+This project is licensed under the [MIT License](LICENSE).
+
+---
 
 ## Acknowledgments
 
-- Thanks to the contributors and the cognitive science community for their insights and support in developing this platform.
+Special thanks to all contributors and the open-source community for their support in building CogniForm.  

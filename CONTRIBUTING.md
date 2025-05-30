@@ -8,7 +8,7 @@ Thank you for your interest in contributing to CogniForm! We welcome contributio
 
 2. **Clone Your Fork**: Clone your forked repository to your local machine.
    ```
-   git clone https://github.com/your-username/CogniForm.git
+   git clone https://github.com/alireza-astane/Cogniform.git
    ```
 
 3. **Create a Branch**: Create a new branch for your feature or bug fix.
